@@ -6,9 +6,7 @@ from pyvis.network import Network
 def main():
     connection = sqlite3.connect("zigistry.db")
     cursor = connection.cursor()
-    cursor.execute(
-        "SELECT repo_id, dependent FROM repo_dependents"
-    )
+    cursor.execute("SELECT repo_id, dependent FROM repo_dependents")
 
     repo2repo_connection = cursor.fetchall()
 
@@ -26,14 +24,17 @@ def main():
         font_color="white",
         directed=True,
         # I am adding this because it was unnesecarily generating lib/ folder.
-        cdn_resources="in_line"
+        cdn_resources="in_line",
     )
 
     net.from_nx(graph_builder)
 
+    net.add_node("zigister", shape="image", image="zigister-finds-repos.svg", size=120, x=100, y=0, fixed=False, mass=5)
+
     net.force_atlas_2based()
 
     net.write_html("graph.html")
+
 
 if __name__ == "__main__":
     main()
