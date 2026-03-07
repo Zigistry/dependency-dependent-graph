@@ -1,5 +1,6 @@
 import sqlite3
 import networkx
+from pyvis.network import Network
 
 
 def main():
@@ -17,6 +18,12 @@ def main():
         graph_builder.add_edge(repo_2, repo_1)
 
     print(graph_builder)
+
+    net = Network()
+
+    net.from_nx(graph_builder)
+
+    net.write_html("graph.html")
 
 if __name__ == "__main__":
     main()
