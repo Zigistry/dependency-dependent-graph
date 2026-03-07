@@ -24,16 +24,35 @@ def main():
         font_color="white",
         directed=True,
         # I am adding this because it was unnesecarily generating lib/ folder.
-        cdn_resources="in_line",
+        cdn_resources="remote",
     )
 
     net.from_nx(graph_builder)
 
-    net.add_node("zigister", shape="image", image="zigister-finds-repos.svg", size=120, x=100, y=0, fixed=False, mass=5)
+    net.add_node(
+        "zigister",
+        shape="image",
+        image="zigister-finds-repos.svg",
+        size=200,
+        x=100,
+        y=0,
+        fixed=False,
+        mass=5,
+    )
 
     net.force_atlas_2based()
 
+    net.options.physics.stabilization = False
     net.write_html("graph.html")
+
+    with open("graph.html", "r+") as file:
+        content = file.read()
+        file.seek(0)
+        file.write(
+            content.replace(
+                "</style>", "#loadingBar{display:none!important}</style>", 1
+            )
+        )
 
 
 if __name__ == "__main__":
