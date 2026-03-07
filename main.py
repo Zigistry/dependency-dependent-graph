@@ -1,5 +1,6 @@
 import sqlite3
 import networkx
+import json
 from pyvis.network import Network
 
 
@@ -16,6 +17,22 @@ def main():
         graph_builder.add_edge(repo_2, repo_1)
 
     print(graph_builder)
+
+    graph_data = {"nodes": [], "edges": []}
+
+    for node in graph_builder.nodes():
+        graph_data["nodes"].append(
+            {
+                "id": node,
+                "label": str(node),
+            }
+        )
+
+    for source, target in graph_builder.edges():
+        graph_data["edges"].append({"from": source, "to": target})
+
+    with open("./graph.json", "w", encoding="utf-8") as json_file:
+        json.dump(graph_data, json_file, indent=0)
 
     net = Network(
         width="100%",

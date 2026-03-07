@@ -11,3 +11,4 @@ wheels/
 *.db*
 *.html
 .DS_Store
+*.json
