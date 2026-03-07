@@ -19,9 +19,19 @@ def main():
 
     print(graph_builder)
 
-    net = Network()
+    net = Network(
+        width="100%",
+        height="90vh",
+        bgcolor="#1e1e1e",
+        font_color="white",
+        directed=True,
+        # I am adding this because it was unnesecarily generating lib/ folder.
+        cdn_resources="in_line"
+    )
 
     net.from_nx(graph_builder)
+
+    net.force_atlas_2based()
 
     net.write_html("graph.html")
 
