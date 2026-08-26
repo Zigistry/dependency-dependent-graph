@@ -67,7 +67,7 @@ def main():
         file.seek(0)
         file.write(
             content.replace(
-                "</style>", "#loadingBar{display:none!important}</style>", 1
+                "</style>", "#loadingBar{display:none!important}\nhtml, body {padding:0; margin:0;}</style>", 1
             )
         )
 
