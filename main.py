@@ -7,9 +7,10 @@ from pyvis.network import Network
 def main():
     connection = sqlite3.connect("zigistry.db")
     cursor = connection.cursor()
-    cursor.execute("SELECT repo_id, dependent FROM repo_dependents")
+    cursor.execute("SELECT repo_id, dependent_repo_id FROM repo_dependents")
 
     repo2repo_connection = cursor.fetchall()
+    connection.close()
 
     graph_builder = networkx.DiGraph()
 
