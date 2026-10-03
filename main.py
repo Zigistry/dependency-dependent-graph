@@ -36,7 +36,7 @@ def main():
 
     net = Network(
         width="100%",
-        height="90vh",
+        height="100%",
         bgcolor="#1e1e1e",
         font_color="white",
         directed=True,
@@ -67,7 +67,24 @@ def main():
         file.seek(0)
         file.write(
             content.replace(
-                "</style>", "#loadingBar{display:none!important}\nhtml, body {padding:0; margin:0;}</style>", 1
+                "</style>",
+                """
+                    #loadingBar {
+                        display: none !important;
+                    }
+
+                    html, body, canvas {
+                        padding: 0;
+                        margin: 0;
+                        height:100vh !important;
+                        background: #1e1e1e !important;
+                    }
+                    * {
+                        border: 0 !important;
+                    }
+                    </style>
+                """,
+                1,
             )
         )
 
